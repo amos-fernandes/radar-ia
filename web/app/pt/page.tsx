@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function PtHome() {
   const [hot, latest] = await Promise.all([fetchHot('pt'), fetchLatest('pt')]);
-  const wa = process.env.NEXT_PUBLIC_WA_LINK || 'https://wa.me/5562999999999?text=Oi!%20Quero%20o%20Radar%20IA';
+  const wa = process.env.NEXT_PUBLIC_WA_LINK || 'https://wa.me/5562981647087?text=Oi!%20Quero%20o%20Radar%20IA';
 
   return (
     <main>

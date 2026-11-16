@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function EnHome() {
   const [hot, latest] = await Promise.all([fetchHot('en'), fetchLatest('en')]);
-  const wa = process.env.NEXT_PUBLIC_WA_LINK || 'https://wa.me/5562999999999?text=Hi!%20I%20want%20AI%20Radar';
+  const wa = process.env.NEXT_PUBLIC_WA_LINK || 'https://wa.me/5562981647087?text=Hi!%20I%20want%20AI%20Radar';
 
   return (
     <main>
