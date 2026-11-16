@@ -26,7 +26,7 @@ services:
       LLM_API_KEY: ${LLM_API_KEY:-}
       LLM_BASE_URL: ${LLM_BASE_URL:-https://api.openai.com/v1}
       LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
-      WHATSAPP_LEAD_NUMBER: ${WHATSAPP_LEAD_NUMBER:-5562999999999}
+      WHATSAPP_LEAD_NUMBER: ${WHATSAPP_LEAD_NUMBER:-5562981647087}
       INGEST_CRON: ${INGEST_CRON:-0 6,18 * * *}
       INGEST_SECRET: ${INGEST_SECRET:-dev-ingest-secret}
     depends_on:
@@ -38,12 +38,12 @@ services:
       context: ./web
       args:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3002}
-        NEXT_PUBLIC_WA_LINK: ${NEXT_PUBLIC_WA_LINK:-https://wa.me/5562999999999?text=Oi!%20Quero%20o%20Radar%20IA}
+        NEXT_PUBLIC_WA_LINK: ${NEXT_PUBLIC_WA_LINK:-https://wa.me/5562981647087?text=Oi!%20Quero%20o%20Radar%20IA}
     ports:
       - "3000:3000"
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3002}
-      NEXT_PUBLIC_WA_LINK: ${NEXT_PUBLIC_WA_LINK:-https://wa.me/5562999999999?text=Oi!%20Quero%20o%20Radar%20IA}
+      NEXT_PUBLIC_WA_LINK: ${NEXT_PUBLIC_WA_LINK:-https://wa.me/5562981647087?text=Oi!%20Quero%20o%20Radar%20IA}
     depends_on:
       - api
 

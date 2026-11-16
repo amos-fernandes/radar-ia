@@ -9,7 +9,7 @@ export const config = {
     baseUrl: process.env.LLM_BASE_URL || 'https://api.openai.com/v1',
     model: process.env.LLM_MODEL || 'gpt-4o-mini',
   },
-  whatsappLeadNumber: process.env.WHATSAPP_LEAD_NUMBER || '5562999999999',
+  whatsappLeadNumber: process.env.WHATSAPP_LEAD_NUMBER || '5562981647087',
   cronSchedule: process.env.INGEST_CRON || '0 6,18 * * *',
   nodeEnv: process.env.NODE_ENV || 'development',
 };
