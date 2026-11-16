@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: radar
+      POSTGRES_PASSWORD: radar
+      POSTGRES_DB: radaria
+    ports:
+      - "5433:5432"
+    volumes:
+      - radar_pg:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U radar -d radaria"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./api
+    ports:
+      - "3002:3002"
+    environment:
+      PORT: 3002
+      DATABASE_URL: postgres://radar:radar@db:5432/radaria
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.openai.com/v1}
+      LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
+      WHATSAPP_LEAD_NUMBER: ${WHATSAPP_LEAD_NUMBER:-5562999999999}
+      INGEST_CRON: ${INGEST_CRON:-0 6,18 * * *}
+      INGEST_SECRET: ${INGEST_SECRET:-dev-ingest-secret}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./web
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3002}
+        NEXT_PUBLIC_WA_LINK: ${NEXT_PUBLIC_WA_LINK:-https://wa.me/5562999999999?text=Oi!%20Quero%20o%20Radar%20IA}
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3002}
+      NEXT_PUBLIC_WA_LINK: ${NEXT_PUBLIC_WA_LINK:-https://wa.me/5562999999999?text=Oi!%20Quero%20o%20Radar%20IA}
+    depends_on:
+      - api
+
+volumes:
+  radar_pg:
